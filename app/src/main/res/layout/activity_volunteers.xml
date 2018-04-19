@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_volunteers"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="projekt_java.organizator_dostaw.DeliveriesActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/volunteers_list_name"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/synchro_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/synchro"/>
+
+    <ListView
+        android:id="@+id/volunteers_list"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@drawable/list_color_selector"
+        android:dividerHeight="1dp">
+    </ListView>
+
+    <Button
+    android:id="@+id/back_to_menu_from_vol"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:textSize="15sp"
+    android:text="@string/back_to_menu"
+    android:onClick="backToMenu"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/back_to_menu_from_vol"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:text="@string/add_new"
+        android:onClick="go_new"/>
+</RelativeLayout>

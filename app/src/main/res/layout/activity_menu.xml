@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:weightSum="1">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textSize="24sp"
+        android:text="@string/menu_option1"
+        android:onClick="go_volunteers"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textSize="24sp"
+        android:text="@string/menu_option2"
+        android:onClick="go_deliveries"/>
+
+    <Button
+        android:text="UPDATE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:layout_weight="0.15"
+        android:onClick="update"/>
+</LinearLayout>

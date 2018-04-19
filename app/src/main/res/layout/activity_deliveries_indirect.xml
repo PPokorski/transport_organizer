@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_deliveries_indirect"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context="projekt_java.organizator_dostaw.DeliveriesIndirectActivity">
+
+    <TextView
+        android:id="@+id/text_in_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/delivery"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/lin_lay_indir_act"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_in_d"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/indirect_option1"
+            android:onClick="goEditDel"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/indirect_option2"
+            android:onClick="goAddHoursDel"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/indirect_option3"
+            android:onClick="callDel"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/indirect_option4"
+            android:onClick="sensSMSDel"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/vol_list_name_indir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lin_lay_indir_act"
+        android:text="@string/available_volunteers"
+        android:textSize="18sp"/>
+
+    <ListView
+        android:id="@+id/available_vols"
+        android:layout_below="@+id/vol_list_name_indir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp">
+
+    </ListView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:text="@string/indirect_back_to_list"
+        android:onClick="backToDelList"/>
+
+</RelativeLayout>

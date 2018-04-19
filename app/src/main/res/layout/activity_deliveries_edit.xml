@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_deliveries_edit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/headline_deliveries_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:text="@string/edit_activity_new"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/delivery_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deliveries_add_name"/>
+
+        <EditText
+            android:id="@+id/delivery_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deliveries_add_from"/>
+
+        <EditText
+            android:id="@+id/delivery_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deliveries_add_count"/>
+
+        <EditText
+            android:id="@+id/delivery_availability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deliveries_add_availability"/>
+
+        <TextView
+            android:id="@+id/delivery_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deliveries_add_status"/>
+
+        <RadioGroup
+            android:id="@+id/delivery_assignment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/assigned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deliveries_add_status_assigned" />
+            <RadioButton
+                android:id="@+id/unassigned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deliveries_add_status_unassigned" />
+            <RadioButton
+                android:id="@+id/confirmed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deliveries_add_status_confirmed" />
+        </RadioGroup>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/deliveries_add_confirm"
+            android:onClick="confirmDelivery"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_volunteers_edit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/headline_volunteers_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:text="@string/edit_activity_new"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/volunteer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/volunteers_add_name"/>
+
+        <EditText
+            android:id="@+id/voluneer_surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/volunteers_add_surname"/>
+
+        <EditText
+            android:id="@+id/voluneer_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/volunteers_add_contact"/>
+
+        <EditText
+            android:id="@+id/voluneer_availability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/volunteers_add_availability"/>
+
+        <EditText
+            android:id="@+id/voluneer_car"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/volunteers_add_car"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/volunteers_add_confirm"
+            android:onClick="confirmVolunteer"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

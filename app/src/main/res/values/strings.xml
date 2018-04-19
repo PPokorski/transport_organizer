@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Organizator Dostaw</string>
+    <string name="menu_option1">Volunteers</string>
+    <string name="menu_option2">Deliveries</string>
+
+    <string name="volunteers_list_name">Volunteers list:</string>
+    <string name="deliveries_list_name">Deliveries list:</string>
+
+    <string name="add_new">Add new</string>
+    <string name="back_to_menu">Back to menu</string>
+
+    <string name="edit_activity_new">New:</string>
+    <string name="edit_activity_edit">Edit:</string>
+
+    <string name="volunteer">Volunteer</string>
+    <string name="delivery">Delivery</string>
+
+    <string name="indirect_option1">Edit</string>
+    <string name="indirect_option2">Add hours</string>
+    <string name="indirect_option3">Call</string>
+    <string name="indirect_option4">Send SMS</string>
+    <string name="indirect_back_to_list">Back</string>
+
+    <string name="available_volunteers">Available volunteers:</string>
+
+    <string name="set_hour">Set</string>
+
+    <string name="volunteers_add_name">Name</string>
+    <string name="volunteers_add_surname">Surname</string>
+    <string name="volunteers_add_contact">Contact</string>
+    <string name="volunteers_add_availability">Availability</string>
+    <string name="volunteers_add_car">Car</string>
+    <string name="volunteers_add_confirm">Confirm</string>
+
+    <string name="deliveries_add_name">Name</string>
+    <string name="deliveries_add_count">Count</string>
+    <string name="deliveries_add_from">From</string>
+    <string name="deliveries_add_availability">Availability</string>
+    <string name="deliveries_add_status">Status</string>
+    <string name="deliveries_add_status_assigned">Assigned</string>
+    <string name="deliveries_add_status_unassigned">Unassigned</string>
+    <string name="deliveries_add_status_confirmed">Confirmed</string>
+    <string name="deliveries_add_status_empty">-</string>
+    <string name="deliveries_add_confirm">Confirm</string>
+</resources>
