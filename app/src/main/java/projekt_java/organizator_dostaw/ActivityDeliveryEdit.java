@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class DeliveriesEditActivity extends AppCompatActivity {
+public class ActivityDeliveryEdit extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deliveries_edit);
+        setContentView(R.layout.activity_delivery_edit);
 
         //załadowanie danych elementu nr X pobranego z docs'a
         int number_on_list =  getIntent().getExtras().getInt("number_on_del_list",-1);

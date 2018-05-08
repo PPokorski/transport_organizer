@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class VolunteersListAdapter extends BaseAdapter {
-    private ArrayList<VolunteersRow> listData;
+public class ListAdapterVolunteer extends BaseAdapter {
+    private ArrayList<Volunteer> listData;
     private LayoutInflater layoutInflater;
 
-    public VolunteersListAdapter(Context aContext, ArrayList<VolunteersRow> listData) {
+    public ListAdapterVolunteer(Context aContext, ArrayList<Volunteer> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
     }

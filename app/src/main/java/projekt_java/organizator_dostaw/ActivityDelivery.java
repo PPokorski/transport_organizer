@@ -1,6 +1,5 @@
 package projekt_java.organizator_dostaw;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class DeliveriesIndirectActivity extends AppCompatActivity {
+public class ActivityDelivery extends AppCompatActivity {
 
     int number_on_list;
 
@@ -20,7 +19,7 @@ public class DeliveriesIndirectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deliveries_indirect);
+        setContentView(R.layout.activity_delivery);
 
         number_on_list =  getIntent().getExtras().getInt("number_on_del_list",-1); //wczytanie jaki miał numer na liście wybrany element
 
@@ -40,14 +39,14 @@ public class DeliveriesIndirectActivity extends AppCompatActivity {
     }
 
     public void goEditDel(View view) {
-        Intent go_edit = new Intent(this, DeliveriesEditActivity.class);
+        Intent go_edit = new Intent(this, ActivityDeliveryEdit.class);
         go_edit.putExtra("number_on_del_list", number_on_list);
         go_edit.putExtra("new_del", false);
         startActivity(go_edit);
     }
 
     public void goAddHoursDel(View view) {
-        Intent go_add_hours = new Intent(this, DeliveriesHours.class);
+        Intent go_add_hours = new Intent(this, ActivityHours.class);
         go_add_hours.putExtra("number_on_del_list", number_on_list);
         startActivity(go_add_hours);
     }
@@ -61,7 +60,7 @@ public class DeliveriesIndirectActivity extends AppCompatActivity {
     }
 
     public void backToDelList(View view) {
-        Intent intent = new Intent(this, DeliveriesActivity.class);
+        Intent intent = new Intent(this, ActivityDeliveries.class);
         startActivity(intent);
     }
 }

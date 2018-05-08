@@ -19,11 +19,4 @@
         android:text="@string/menu_option2"
         android:onClick="go_deliveries"/>
 
-    <Button
-        android:text="UPDATE"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:layout_weight="0.15"
-        android:onClick="update"/>
 </LinearLayout>

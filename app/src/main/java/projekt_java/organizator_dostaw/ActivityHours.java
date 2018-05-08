@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
 
-public class DeliveriesHours extends AppCompatActivity {
+public class ActivityHours extends AppCompatActivity {
 
     int number_on_list;
     private TimePicker timePicker1;
@@ -14,9 +14,9 @@ public class DeliveriesHours extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deliveries_hours);
+        setContentView(R.layout.activity_hours);
 
-        timePicker1 = (TimePicker) findViewById(R.id.timePicker_del);
+        timePicker1 = (TimePicker) findViewById(R.id.time_picker);
 
         number_on_list =  getIntent().getExtras().getInt("number_on_vol_list",-1); //wczytanie jaki miał numer na liście
     }
@@ -27,10 +27,8 @@ public class DeliveriesHours extends AppCompatActivity {
     //te pojedyncze to Number Picker'y
 
     public void setHoursDel(View view){
-        //int hour = timePicker1.getHour();
-        //int min = timePicker1.getMinute();
 
-        Intent go_indirect = new Intent(this, DeliveriesIndirectActivity.class);
+        Intent go_indirect = new Intent(this, ActivityDelivery.class);
         go_indirect.putExtra("number_on_vol_list", number_on_list);
         startActivity(go_indirect);
     }

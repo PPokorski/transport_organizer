@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 
 
-public class DeliveriesListAdapter extends BaseAdapter {
-    private ArrayList<DeliveriesRow> listData;
+public class ListAdapterDelivery extends BaseAdapter {
+    private ArrayList<Delivery> listData;
     private LayoutInflater layoutInflater;
 
-    public DeliveriesListAdapter(Context aContext, ArrayList<DeliveriesRow> listData) {
+    public ListAdapterDelivery(Context aContext, ArrayList<Delivery> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
     }

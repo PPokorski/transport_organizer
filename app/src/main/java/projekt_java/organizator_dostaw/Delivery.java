@@ -1,7 +1,7 @@
 package projekt_java.organizator_dostaw;
 
 
-public class DeliveriesRow {
+public class Delivery {
 
     private String skad;
     private String nazwa;

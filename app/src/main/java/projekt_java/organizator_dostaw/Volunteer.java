@@ -1,6 +1,6 @@
 package projekt_java.organizator_dostaw;
 
-public class VolunteersRow {
+public class Volunteer {
 
     private String imie;
     private String nazwisko;

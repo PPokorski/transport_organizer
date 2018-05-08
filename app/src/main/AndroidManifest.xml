@@ -19,17 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VolunteersActivity" />
-        <activity android:name=".DeliveriesActivity" />
-        <activity android:name=".VolunteersEditActivity" />
-        <activity android:name=".DeliveriesEditActivity" />
+        <activity android:name=".ActivityVolunteers" />
+        <activity android:name=".ActivityDeliveries" />
+        <activity android:name=".ActivityVolunteerEdit" />
+        <activity android:name=".ActivityDeliveryEdit" />
         <activity
             android:name=".UpdateActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog.MinWidth" />
-        <activity android:name=".VolunteersIndirectActivity" />
-        <activity android:name=".VolunteersHours" />
-        <activity android:name=".DeliveriesIndirectActivity" />
-        <activity android:name=".DeliveriesHours"></activity>
+        <activity android:name=".ActivityVolunteer" />
+        <activity android:name=".ActivityDelivery" />
+        <activity android:name=".ActivityHours" />
     </application>
 
 </manifest>
