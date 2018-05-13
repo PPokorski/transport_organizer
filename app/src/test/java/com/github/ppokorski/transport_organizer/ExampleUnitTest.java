@@ -1,4 +1,4 @@
-package projekt_java.organizator_dostaw;
+package projekt_java.transport_organizer;
 
 import org.junit.Test;
 

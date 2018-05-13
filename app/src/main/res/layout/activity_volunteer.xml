@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="projekt_java.organizator_dostaw.ActivityVolunteer">
+    tools:context="projekt_java.transport_organizer.ActivityVolunteer">
 
     <TextView
         android:id="@+id/text_view"

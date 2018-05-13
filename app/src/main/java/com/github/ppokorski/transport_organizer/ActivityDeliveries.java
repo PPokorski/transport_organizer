@@ -1,4 +1,4 @@
-package projekt_java.organizator_dostaw;
+package com.github.ppokorski.transport_organizer;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +17,7 @@ public class ActivityDeliveries extends AppCompatActivity {
         setContentView(R.layout.activity_deliveries);
 
         ArrayList image_details = getListData();
-        final ListView list = (ListView) findViewById(R.id.list_deliveries);
+        ListView list = (ListView) findViewById(R.id.list_deliveries);
         list.setAdapter(new ListAdapterDelivery(this, image_details));
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,21 +48,30 @@ public class ActivityDeliveries extends AppCompatActivity {
         pozycja1.setSkad("ul. Postępu 2, Mokotów");
         pozycja1.setKiedy_mozna("czwartek 7-15, piątek 10-12");
         results.add(pozycja1);
+        Delivery pozycja2 = new Delivery();
+        pozycja2.setNazwa("Karp");
+        pozycja2.setIlosc("5,5kg");
+        pozycja2.setStatus("brak");
+        pozycja2.setSkad("ul. Postępu 2, Mokotów");
+        pozycja2.setKiedy_mozna("czwartek 7-15, piątek 10-12");
+        results.add(pozycja2);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
 
         // TUTAJ DODAWAC WIERSZE DO LISTY
 
         return results;
     }
 
-    public void go_new(View view){
+    public void addNewDelivery(View view){
         Intent start_edit = new Intent(ActivityDeliveries.this, ActivityDeliveryEdit.class);
         start_edit.putExtra("number_on_vol_list", -1);
         start_edit.putExtra("new_del", true);
-        startActivity(start_edit);
-    }
-
-    public void backToMenu(View view){
-        Intent start_edit = new Intent(this, Menu.class);
         startActivity(start_edit);
     }
 }

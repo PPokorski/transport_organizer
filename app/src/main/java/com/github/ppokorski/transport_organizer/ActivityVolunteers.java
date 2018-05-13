@@ -1,4 +1,4 @@
-package projekt_java.organizator_dostaw;
+package com.github.ppokorski.transport_organizer;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -49,20 +49,24 @@ public class ActivityVolunteers extends AppCompatActivity {
         pozycja1.setDostepnosc("czwartek 10-17");
         pozycja1.setSamochod("Audi A4");
         results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
+        results.add(pozycja1);
         // TUTAJ DODAWAC WIERSZE DO LISTY
 
         return results;
     }
 
-    public void go_new(View view){
+    public void addNewVolunteer(View view) {
         Intent start_edit = new Intent(ActivityVolunteers.this, ActivityVolunteerEdit.class);
         start_edit.putExtra("number_on_vol_list", -1);
         start_edit.putExtra("new_vol", true);
-        startActivity(start_edit);
-    }
-
-    public void backToMenu(View view){
-        Intent start_edit = new Intent(this, Menu.class);
         startActivity(start_edit);
     }
 }

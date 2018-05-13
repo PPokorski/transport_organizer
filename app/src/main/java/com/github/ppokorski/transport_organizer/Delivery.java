@@ -1,4 +1,4 @@
-package projekt_java.organizator_dostaw;
+package com.github.ppokorski.transport_organizer;
 
 
 public class Delivery {

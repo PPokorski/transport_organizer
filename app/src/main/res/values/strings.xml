@@ -42,4 +42,6 @@
     <string name="deliveries_add_status_confirmed">Confirmed</string>
     <string name="deliveries_add_status_empty">-</string>
     <string name="deliveries_add_confirm">Confirm</string>
+    <string name="title_activity_lolo">Lolo</string>
+    <string name="title_activity_dsada">dsada</string>
 </resources>
