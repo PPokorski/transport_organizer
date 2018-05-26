@@ -15,46 +15,65 @@
         android:text="@string/edit_activity_new"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/volunteer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/volunteers_add_name"/>
+            android:hint="Name"
+            android:inputType="text|textCapWords" />
 
         <EditText
-            android:id="@+id/voluneer_surname"
+            android:id="@+id/volunteer_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/volunteers_add_surname"/>
+            android:hint="Surname"
+            android:inputType="text|textCapWords" />
 
         <EditText
-            android:id="@+id/voluneer_contact"
+            android:id="@+id/volunteer_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/volunteers_add_contact"/>
+            android:hint="Phone number"
+            android:inputType="phone" />
 
         <EditText
-            android:id="@+id/voluneer_availability"
+            android:id="@+id/volunteer_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/volunteers_add_availability"/>
+            android:hint="Email addres"
+            android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/voluneer_car"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:text="Cars"
+            android:textSize="20sp" />
+
+        <ListView
+            android:id="@+id/list_cars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        </ListView>
+
+        <Button
+            android:id="@+id/car_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/volunteers_add_car"/>
+            android:text="Add car" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/volunteers_add_confirm"
-            android:onClick="confirmVolunteer"/>
+            android:onClick="confirmVolunteer"
+            android:text="@string/volunteers_add_confirm" />
 
     </LinearLayout>
 

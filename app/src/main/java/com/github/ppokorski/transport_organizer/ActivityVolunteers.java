@@ -7,17 +7,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.github.ppokorski.transport_organizer.models.Car;
+import com.github.ppokorski.transport_organizer.models.Size;
+import com.github.ppokorski.transport_organizer.models.Volunteer;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityVolunteers extends AppCompatActivity {
+
+    ArrayList<Volunteer> volunteers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volunteers);
 
+        volunteers = new ArrayList<>();
         ArrayList image_details = getListData();
-        final ListView list = (ListView) findViewById(R.id.list_volunteers);
+        ListView list = (ListView) findViewById(R.id.list_volunteers);
         list.setAdapter(new ListAdapterVolunteer(this, image_details));
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -25,47 +33,37 @@ public class ActivityVolunteers extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Intent go_indirect = new Intent(ActivityVolunteers.this, ActivityVolunteer.class);
-                go_indirect.putExtra("number_on_vol_list", position);
+                go_indirect.putExtra("volunteer", volunteers.get(position));
                 startActivity(go_indirect);
             }
         });
     }
 
     private ArrayList getListData() {
-        ArrayList<Volunteer> results = new ArrayList<Volunteer>();
-        /*Volunteer opisKolumn = new Volunteer();
-        opisKolumn.setImie("IMIE");
-        opisKolumn.setNazwisko("NAZWISKO");
-        opisKolumn.setKontakt("KONTAKT");
-        opisKolumn.setDostepnosc("DOSTEPNOSC");
-        opisKolumn.setSamochod("SAMOCHOD");
-        results.add(opisKolumn);*/
+        Volunteer vol = new Volunteer();
+        vol.setName("Jan");
+        vol.setSurname("Kowalski");
+        vol.setPhoneNumber("65465432");
+        vol.setEmail("j.kowalski@gmail.com");
+        Car car = new Car("Tico", Size.SMALL);
+        Car car1 = new Car("Lambo", Size.MEDIUM);
+        vol.addCar(car);
+        vol.addCar(car1);
 
+        volunteers.add(vol);
+        volunteers.add(vol);
+        volunteers.add(vol);
+        volunteers.add(vol);
+        volunteers.add(vol);
 
-        Volunteer pozycja1 = new Volunteer();
-        pozycja1.setImie("Marek");
-        pozycja1.setNazwisko("Kowal");
-        pozycja1.setKontakt("601622121");
-        pozycja1.setDostepnosc("czwartek 10-17");
-        pozycja1.setSamochod("Audi A4");
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
         // TUTAJ DODAWAC WIERSZE DO LISTY
 
-        return results;
+        return volunteers;
     }
 
     public void addNewVolunteer(View view) {
         Intent start_edit = new Intent(ActivityVolunteers.this, ActivityVolunteerEdit.class);
-        start_edit.putExtra("number_on_vol_list", -1);
+        start_edit.putExtra("volunteer", new Volunteer());
         start_edit.putExtra("new_vol", true);
         startActivity(start_edit);
     }

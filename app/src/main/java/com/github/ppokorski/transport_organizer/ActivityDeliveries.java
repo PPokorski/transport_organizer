@@ -7,7 +7,10 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.github.ppokorski.transport_organizer.models.Transport;
+
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ActivityDeliveries extends AppCompatActivity {
 
@@ -32,7 +35,7 @@ public class ActivityDeliveries extends AppCompatActivity {
     }
 
     private ArrayList getListData() {
-        ArrayList<Delivery> results = new ArrayList<Delivery>();
+        ArrayList<Transport> results = new ArrayList<Transport>();
         /*Delivery opisKolumn = new Delivery();
         opisKolumn.setSkad("SKAD");
         opisKolumn.setNazwa("NAZWA");
@@ -41,27 +44,38 @@ public class ActivityDeliveries extends AppCompatActivity {
         opisKolumn.setStatus("STATUS");
         results.add(opisKolumn);*/
 
-        Delivery pozycja1 = new Delivery();
-        pozycja1.setNazwa("Karp");
-        pozycja1.setIlosc("5,5kg");
-        pozycja1.setStatus("brak");
-        pozycja1.setSkad("ul. Postępu 2, Mokotów");
-        pozycja1.setKiedy_mozna("czwartek 7-15, piątek 10-12");
-        results.add(pozycja1);
-        Delivery pozycja2 = new Delivery();
-        pozycja2.setNazwa("Karp");
-        pozycja2.setIlosc("5,5kg");
-        pozycja2.setStatus("brak");
-        pozycja2.setSkad("ul. Postępu 2, Mokotów");
-        pozycja2.setKiedy_mozna("czwartek 7-15, piątek 10-12");
-        results.add(pozycja2);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
-        results.add(pozycja1);
+        Transport transport = new Transport();
+        transport.setName("5 kg karpia!!");
+        transport.setPickupAddress("Ul. Marszałkowska 52");
+        transport.setTargetAddress("Ul. Bokserska 53");
+
+        results.add(transport);
+        results.add(transport);
+        results.add(transport);
+        results.add(transport);
+
+
+//        Delivery pozycja1 = new Delivery();
+//        pozycja1.setNazwa("Karp");
+//        pozycja1.setIlosc("5,5kg");
+//        pozycja1.setStatus("brak");
+//        pozycja1.setSkad("ul. Postępu 2, Mokotów");
+//        pozycja1.setKiedy_mozna("czwartek 7-15, piątek 10-12");
+//        results.add(pozycja1);
+//        Delivery pozycja2 = new Delivery();
+//        pozycja2.setNazwa("Karp");
+//        pozycja2.setIlosc("5,5kg");
+//        pozycja2.setStatus("brak");
+//        pozycja2.setSkad("ul. Postępu 2, Mokotów");
+//        pozycja2.setKiedy_mozna("czwartek 7-15, piątek 10-12");
+//        results.add(pozycja2);
+//        results.add(pozycja1);
+//        results.add(pozycja1);
+//        results.add(pozycja1);
+//        results.add(pozycja1);
+//        results.add(pozycja1);
+//        results.add(pozycja1);
+//        results.add(pozycja1);
 
         // TUTAJ DODAWAC WIERSZE DO LISTY
 

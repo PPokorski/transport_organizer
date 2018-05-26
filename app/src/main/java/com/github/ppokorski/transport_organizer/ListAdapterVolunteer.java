@@ -2,31 +2,37 @@ package com.github.ppokorski.transport_organizer;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.github.ppokorski.transport_organizer.models.Car;
+import com.github.ppokorski.transport_organizer.models.Volunteer;
+import com.google.api.client.util.StringUtils;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListAdapterVolunteer extends BaseAdapter {
-    private ArrayList<Volunteer> listData;
-    private LayoutInflater layoutInflater;
+    private ArrayList<Volunteer> list_data;
+    private LayoutInflater layout_inflater;
 
-    public ListAdapterVolunteer(Context aContext, ArrayList<Volunteer> listData) {
-        this.listData = listData;
-        layoutInflater = LayoutInflater.from(aContext);
+    public ListAdapterVolunteer(Context aContext, ArrayList<Volunteer> list_data) {
+        this.list_data = list_data;
+        layout_inflater = LayoutInflater.from(aContext);
     }
 
     @Override
     public int getCount() {
-        return listData.size();
+        return list_data.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listData.get(position);
+        return list_data.get(position);
     }
 
     @Override
@@ -37,31 +43,36 @@ public class ListAdapterVolunteer extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.volunteers_list_row, null);
+            convertView = layout_inflater.inflate(R.layout.volunteers_list_row, null);
             holder = new ViewHolder();
-            holder.imieView = (TextView) convertView.findViewById(R.id.imie);
-            holder.nazwiskoView = (TextView) convertView.findViewById(R.id.nazwisko);
-            holder.kontaktView = (TextView) convertView.findViewById(R.id.kontakt);
-            holder.dostepnoscView = (TextView) convertView.findViewById(R.id.dostepnosc);
-            holder.samochodView = (TextView) convertView.findViewById(R.id.samochod);
+            holder.txt_name = (TextView) convertView.findViewById(R.id.name);
+            holder.txt_surname = (TextView) convertView.findViewById(R.id.surname);
+            holder.txt_phone_number = (TextView) convertView.findViewById(R.id.phone_number);
+            holder.txt_email = (TextView) convertView.findViewById(R.id.email);
+            holder.txt_cars = (TextView) convertView.findViewById(R.id.cars);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.imieView.setText(listData.get(position).getImie());
-        holder.nazwiskoView.setText(" "+listData.get(position).getNazwisko());
-        holder.kontaktView.setText(listData.get(position).getKontakt());
-        holder.dostepnoscView.setText(" , " +listData.get(position).getDostepnosc());
-        holder.samochodView.setText(" , " +listData.get(position).getSamochod());
+        holder.txt_name.setText(list_data.get(position).getName());
+        holder.txt_surname.setText(list_data.get(position).getSurname());
+        holder.txt_phone_number.setText(list_data.get(position).getPhoneNumber());
+        holder.txt_email.setText(list_data.get(position).getEmail());
+        List<String> cars = new ArrayList<>();
+        for (Car car : list_data.get(position).getCars())
+        {
+            cars.add(car.getName());
+        }
+        holder.txt_cars.setText(TextUtils.join(", ", cars));
         return convertView;
     }
 
     static class ViewHolder {
-        TextView imieView;
-        TextView nazwiskoView;
-        TextView kontaktView;
-        TextView dostepnoscView;
-        TextView samochodView;
+        TextView txt_name;
+        TextView txt_surname;
+        TextView txt_phone_number;
+        TextView txt_email;
+        TextView txt_cars;
     }
 }
