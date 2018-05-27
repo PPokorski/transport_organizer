@@ -2,16 +2,16 @@ package com.github.ppokorski.transport_organizer.models;
 
 import java.util.ArrayList;
 
-public enum Size {
-    SMALL(0, "Small"),
-    MEDIUM(1, "Medium"),
-    LARGE(2, "Large");
+public enum Status {
+    UNASSIGNED(0, "Unassigned"),
+    ASSIGNED(1, "Assigned"),
+    CONFIRMED(2, "Confirmed");
 
     public static ArrayList<String> getValues() {
         ArrayList<String> values = new ArrayList<>();
-        for (Size size : Size.values())
+        for (Status status : Status.values())
         {
-            values.add(size.value);
+            values.add(status.value);
         }
         return values;
     }
@@ -19,7 +19,7 @@ public enum Size {
     private int key;
     private String value;
 
-    Size(int key, String value) {
+    Status(int key, String value) {
         this.key = key;
         this.value = value;
     }

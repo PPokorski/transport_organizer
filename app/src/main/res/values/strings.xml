@@ -44,4 +44,6 @@
     <string name="deliveries_add_confirm">Confirm</string>
     <string name="title_activity_lolo">Lolo</string>
     <string name="title_activity_dsada">dsada</string>
+    <string name="title_activity_cars_edit">ActivityCarsEdit</string>
+    <string name="title_activity_hours_edit">ActivityHoursEdit</string>
 </resources>

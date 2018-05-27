@@ -48,33 +48,6 @@
             android:hint="Email addres"
             android:inputType="textEmailAddress" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"
-            android:text="Cars"
-            android:textSize="20sp" />
-
-        <ListView
-            android:id="@+id/list_cars"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-        </ListView>
-
-        <Button
-            android:id="@+id/car_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add car" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="confirmVolunteer"
-            android:text="@string/volunteers_add_confirm" />
-
     </LinearLayout>
 
 </RelativeLayout>

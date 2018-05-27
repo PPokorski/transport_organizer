@@ -3,25 +3,36 @@ package com.github.ppokorski.transport_organizer.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class Transport extends Identificable implements Parcelable {
     private String name;
     private String pickup_address;
     private String target_address;
     private Size size;
+    private Status status;
 
     private Volunteer volunteer;
     private Donor donor;
     private Guest guest;
 
+     private ArrayList<AvailableHours> available_hours;
+
     public Transport() {
         super();
+
+        size = Size.SMALL;
+        status = Status.UNASSIGNED;
+        available_hours = new ArrayList<>();
     }
 
-    public Transport(String name, String pickup_address, String target_address, Size size) {
+    public Transport(String name, String pickup_address, String target_address, Size size, Status status, ArrayList<AvailableHours> available_hours) {
         this.name = name;
         this.pickup_address = pickup_address;
         this.target_address = target_address;
         this.size = size;
+        this.status = status;
+        this.available_hours = available_hours;
     }
 
     private Transport(Parcel in) {
@@ -30,9 +41,12 @@ public class Transport extends Identificable implements Parcelable {
         this.pickup_address = in.readString();
         this.target_address = in.readString();
         this.size = Size.values()[in.readInt()];
+        this.status = Status.values()[in.readInt()];
         this.volunteer = in.readParcelable(getClass().getClassLoader());
         this.donor = in.readParcelable(getClass().getClassLoader());
         this.guest = in.readParcelable(getClass().getClassLoader());
+        available_hours = new ArrayList<>();
+        in.readTypedList(available_hours, AvailableHours.CREATOR);
     }
 
     @Override
@@ -47,9 +61,11 @@ public class Transport extends Identificable implements Parcelable {
         out.writeString(pickup_address);
         out.writeString(target_address);
         out.writeInt(size.ordinal());
+        out.writeInt(status.ordinal());
         out.writeParcelable(volunteer, flags);
         out.writeParcelable(donor, flags);
         out.writeParcelable(guest, flags);
+        out.writeTypedList(available_hours);
     }
 
     public static final Parcelable.Creator<Transport> CREATOR = new Parcelable.Creator<Transport>() {
@@ -94,6 +110,30 @@ public class Transport extends Identificable implements Parcelable {
         this.size = size;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getReporterPhoneNumber() {
+        if (donor == null && guest == null)
+        {
+            throw new IllegalStateException("Either Donor or Guest needs to be initialized");
+        }
+
+        if (donor != null)
+        {
+            return donor.getPhoneNumber();
+        }
+        else
+        {
+            return guest.getPhoneNumber();
+        }
+    }
+
     public Volunteer getVolunteer() {
         return volunteer;
     }
@@ -107,6 +147,10 @@ public class Transport extends Identificable implements Parcelable {
     }
 
     public void setDonor(Donor donor) {
+        if (this.guest != null)
+        {
+            throw new IllegalStateException("The Donor cannot be set if Guest is not null");
+        }
         this.donor = donor;
     }
 
@@ -115,6 +159,18 @@ public class Transport extends Identificable implements Parcelable {
     }
 
     public void setGuest(Guest guest) {
+        if (this.donor != null)
+        {
+            throw new IllegalStateException("The Guest cannot be set if Donor is not null");
+        }
         this.guest = guest;
+    }
+
+    public ArrayList<AvailableHours> getAvailableHours() {
+        return available_hours;
+    }
+
+    public void setAvailableHours(ArrayList<AvailableHours> available_hours) {
+        this.available_hours = available_hours;
     }
 }

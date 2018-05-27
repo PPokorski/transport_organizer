@@ -3,14 +3,13 @@ package com.github.ppokorski.transport_organizer;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -54,7 +53,7 @@ public class ListAdapterCar extends BaseAdapter {
             holder.spin_size = (Spinner) convert_view.findViewById(R.id.size);
             holder.spin_size.setAdapter(new ArrayAdapter<Size>(layout_inflater.getContext(), android.R.layout.simple_spinner_item, Size.values()));
             convert_view.setTag(holder);
-            holder.delete_button = (ImageButton) convert_view.findViewById(R.id.delete_button);
+            holder.delete_button = (ImageButton) convert_view.findViewById(R.id.delete_button_car);
         } else {
             holder = (ViewHolder) convert_view.getTag();
         }
@@ -76,6 +75,18 @@ public class ListAdapterCar extends BaseAdapter {
             @Override
             public void afterTextChanged(Editable editable) {
                 list_cars.get(position).setName(editable.toString());
+            }
+        });
+
+        holder.spin_size.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int spinner_position, long id) {
+                list_cars.get(position).setSize(Size.values()[spinner_position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
         holder.delete_button.setOnClickListener(new View.OnClickListener() {

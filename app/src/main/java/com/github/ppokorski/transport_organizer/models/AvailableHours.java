@@ -11,6 +11,8 @@ public class AvailableHours extends Identificable implements Parcelable {
 
     public AvailableHours() {
         super();
+        begin = new Date();
+        end = new Date();
     }
 
     public AvailableHours(Date begin, Date end) {
@@ -33,7 +35,7 @@ public class AvailableHours extends Identificable implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeLong(id);
         out.writeLong(begin.getTime());
-        out.writeLong(begin.getTime());
+        out.writeLong(end.getTime());
     }
 
     public static final Parcelable.Creator<AvailableHours> CREATOR = new Parcelable.Creator<AvailableHours>() {

@@ -25,7 +25,19 @@
         <activity android:name=".ActivityDeliveryEdit" />
         <activity android:name=".ActivityVolunteer" />
         <activity android:name=".ActivityDelivery" />
-        <activity android:name=".ActivityHours" />
+        <activity
+            android:name=".ActivityCarsEdit"
+            android:label="@string/title_activity_cars_edit"
+            android:parentActivityName=".ActivityVolunteer"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.github.ppokorski.transport_organizer.ActivityVolunteer" />
+        </activity>
+        <activity
+            android:name=".ActivityHoursEdit"
+            android:label="@string/title_activity_hours_edit"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

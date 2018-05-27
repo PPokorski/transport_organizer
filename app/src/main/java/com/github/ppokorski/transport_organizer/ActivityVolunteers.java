@@ -1,6 +1,7 @@
 package com.github.ppokorski.transport_organizer;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,15 +57,12 @@ public class ActivityVolunteers extends AppCompatActivity {
         volunteers.add(vol);
         volunteers.add(vol);
 
-        // TUTAJ DODAWAC WIERSZE DO LISTY
-
         return volunteers;
     }
 
     public void addNewVolunteer(View view) {
         Intent start_edit = new Intent(ActivityVolunteers.this, ActivityVolunteerEdit.class);
-        start_edit.putExtra("volunteer", new Volunteer());
-        start_edit.putExtra("new_vol", true);
+        start_edit.putExtra("volunteer", (Parcelable) null);
         startActivity(start_edit);
     }
 }

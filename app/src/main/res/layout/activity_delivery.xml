@@ -50,39 +50,12 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:onClick="sendSMSDel"
             android:text="@string/indirect_option4"
-            android:onClick="sensSMSDel"/>
+            android:textSize="20sp" />
 
 
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/vol_list_name_indir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/lin_lay_indir_act"
-        android:text="@string/available_volunteers"
-        android:textSize="18sp"/>
-
-    <ListView
-        android:id="@+id/available_vols"
-        android:layout_below="@+id/vol_list_name_indir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="1dp">
-
-    </ListView>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:text="@string/indirect_back_to_list"
-        android:onClick="backToDelList"/>
 
 </RelativeLayout>

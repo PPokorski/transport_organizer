@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     defaultConfig {
-        applicationId "projekt_java.organizator_dostaw"
+        applicationId "com.github.ppokorski.transport_organizer"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -31,5 +31,6 @@ dependencies {
     implementation('com.google.apis:google-api-services-sheets:v4-rev41-1.22.0') {
         exclude group: 'org.apache.httpcomponents'
     }
+    implementation 'com.github.citux:datetimepicker:0.2.0'
     testImplementation 'junit:junit:4.12'
 }

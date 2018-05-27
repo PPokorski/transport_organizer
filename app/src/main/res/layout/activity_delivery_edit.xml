@@ -24,19 +24,19 @@
             android:id="@+id/delivery_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deliveries_add_name"/>
+            android:hint="@string/deliveries_add_name"/>
 
         <EditText
             android:id="@+id/delivery_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deliveries_add_from"/>
+            android:hint="@string/deliveries_add_from"/>
 
         <EditText
-            android:id="@+id/delivery_count"
+            android:id="@+id/delivery_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deliveries_add_count"/>
+            android:hint="To"/>
 
         <EditText
             android:id="@+id/delivery_availability"

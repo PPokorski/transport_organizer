@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="projekt_java.transport_organizer.ActivityVolunteer">
+    tools:context="com.github.ppokorski.transport_organizer.ActivityVolunteer">
 
     <TextView
         android:id="@+id/text_view"
@@ -35,9 +35,16 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/indirect_option2"
-            android:onClick="goAddHoursVol"/>
+            android:onClick="goEditCars"
+            android:text="Manage cars"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goAddHoursVol"
+            android:text="Manage hours"
+            android:textSize="20sp" />
 
         <Button
             android:layout_width="match_parent"
@@ -49,19 +56,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:onClick="sendSMSVol"
             android:text="@string/indirect_option4"
-            android:onClick="sensSMSVol"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:text="@string/indirect_back_to_list"
-        android:onClick="backToVolList"/>
 
 </RelativeLayout>

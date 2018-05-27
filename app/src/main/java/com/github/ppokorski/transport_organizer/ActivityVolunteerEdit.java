@@ -1,5 +1,8 @@
 package com.github.ppokorski.transport_organizer;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +19,7 @@ import java.util.ArrayList;
 public class ActivityVolunteerEdit extends AppCompatActivity {
 
     Volunteer volunteer;
-
-    Button add_button;
+    Intent result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class ActivityVolunteerEdit extends AppCompatActivity {
 
         volunteer = new Volunteer();
         volunteer =  getIntent().getExtras().getParcelable("volunteer");
-        boolean new_vol = getIntent().getExtras().getBoolean("new_vol");
+        boolean new_vol = (volunteer == null);
 
         TextView headline = (TextView) findViewById(R.id.headline_volunteers_edit);
         if(new_vol){
@@ -42,15 +44,6 @@ public class ActivityVolunteerEdit extends AppCompatActivity {
         TextView txt_surname = (TextView) findViewById(R.id.volunteer_surname);
         TextView txt_phone_number = (TextView) findViewById(R.id.volunteer_phone_number);
         TextView txt_email = (TextView) findViewById(R.id.volunteer_email);
-        final ListView list_cars = (ListView) findViewById(R.id.list_cars);
-        add_button = (Button) findViewById(R.id.car_add);
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                volunteer.addCar(new Car());
-                ((BaseAdapter)list_cars.getAdapter()).notifyDataSetChanged();
-            }
-        });
 
         if(!new_vol)
         {
@@ -58,14 +51,32 @@ public class ActivityVolunteerEdit extends AppCompatActivity {
             txt_surname.setText(volunteer.getSurname());
             txt_phone_number.setText(volunteer.getPhoneNumber());
             txt_email.setText(volunteer.getEmail());
-            list_cars.setAdapter(new ListAdapterCar(this, volunteer.getCars()));
         }
+
+        result = new Intent();
     }
 
-    public void confirmVolunteer(View view){
-        //edycja bezposrednio w docs'ie
-        // po wcisnieciu przycisku, pola z layoutu z danymi zapisywane do docs'a
-
-        onBackPressed();
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Save changes?")
+                .setMessage("Do you want to save the changes?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        result.putExtra("volunteer", volunteer);
+                        setResult(RESULT_OK, result);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        setResult(RESULT_CANCELED, result);
+                        finish();
+                    }
+                })
+                .show();
     }
 }
