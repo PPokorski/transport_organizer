@@ -36,7 +36,7 @@ public class ActivityDelivery extends AppCompatActivity {
             case MANAGE_TRANSPORT_REQUEST:
                 if(resultCode == RESULT_OK)
                 {
-                    Transport transport = data.getParcelableExtra("transport");
+                    this.transport = data.getParcelableExtra("transport");;
                 }
                 break;
 

@@ -147,7 +147,7 @@ public class Transport extends Identificable implements Parcelable {
     }
 
     public void setDonor(Donor donor) {
-        if (this.guest != null)
+        if (this.guest != null && donor != null)
         {
             throw new IllegalStateException("The Donor cannot be set if Guest is not null");
         }
@@ -159,7 +159,7 @@ public class Transport extends Identificable implements Parcelable {
     }
 
     public void setGuest(Guest guest) {
-        if (this.donor != null)
+        if (this.donor != null && guest != null)
         {
             throw new IllegalStateException("The Guest cannot be set if Donor is not null");
         }

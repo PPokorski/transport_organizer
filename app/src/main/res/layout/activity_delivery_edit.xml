@@ -1,83 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_deliveries_edit"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/headline_deliveries_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:text="@string/edit_activity_new"/>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/delivery_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/deliveries_add_name"/>
-
-        <EditText
-            android:id="@+id/delivery_from"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/deliveries_add_from"/>
-
-        <EditText
-            android:id="@+id/delivery_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="To"/>
-
-        <EditText
-            android:id="@+id/delivery_availability"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/deliveries_add_availability"/>
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/delivery_status"
-            android:layout_width="match_parent"
+            android:id="@+id/headline_deliveries_edit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/deliveries_add_status"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:text="@string/edit_activity_new"/>
 
-        <RadioGroup
-            android:id="@+id/delivery_assignment"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/assigned"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/deliveries_add_status_assigned" />
-            <RadioButton
-                android:id="@+id/unassigned"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/deliveries_add_status_unassigned" />
-            <RadioButton
-                android:id="@+id/confirmed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/deliveries_add_status_confirmed" />
-        </RadioGroup>
-
-        <Button
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/deliveries_add_confirm"
-            android:onClick="confirmDelivery"/>
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/transport_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/deliveries_add_name" />
 
-</RelativeLayout>
+            <EditText
+                android:id="@+id/transport_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/deliveries_add_from" />
+
+            <EditText
+                android:id="@+id/transport_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="To" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size" />
+
+            <com.github.ppokorski.transport_organizer.ui.EnumRadioGroup
+                android:id="@+id/transport_size"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status" />
+
+            <com.github.ppokorski.transport_organizer.ui.EnumRadioGroup
+                android:id="@+id/transport_status"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+            </com.github.ppokorski.transport_organizer.ui.EnumRadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rg_reporter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_donor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Donor" />
+
+                <RadioButton
+                    android:id="@+id/rb_guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Guest" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rg_donor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Company" />
+
+                <RadioButton
+                    android:id="@+id/rb_person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Person" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/txt_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Company name" />
+
+            <EditText
+                android:id="@+id/txt_person_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Person name" />
+
+            <EditText
+                android:id="@+id/txt_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Address" />
+
+            <EditText
+                android:id="@+id/txt_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Phone number" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

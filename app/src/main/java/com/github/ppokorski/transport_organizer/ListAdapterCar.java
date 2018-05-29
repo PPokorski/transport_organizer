@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.github.ppokorski.transport_organizer.models.Car;
 import com.github.ppokorski.transport_organizer.models.Size;
+import com.github.ppokorski.transport_organizer.ui.SizeSpinner;
 
 import java.util.ArrayList;
 
@@ -50,8 +51,7 @@ public class ListAdapterCar extends BaseAdapter {
             holder = new ViewHolder();
 
             holder.txt_name = (TextView) convert_view.findViewById(R.id.name);
-            holder.spin_size = (Spinner) convert_view.findViewById(R.id.size);
-            holder.spin_size.setAdapter(new ArrayAdapter<Size>(layout_inflater.getContext(), android.R.layout.simple_spinner_item, Size.values()));
+            holder.spin_size = (SizeSpinner) convert_view.findViewById(R.id.size);
             convert_view.setTag(holder);
             holder.delete_button = (ImageButton) convert_view.findViewById(R.id.delete_button_car);
         } else {
@@ -59,7 +59,7 @@ public class ListAdapterCar extends BaseAdapter {
         }
 
         holder.txt_name.setText(list_cars.get(position).getName());
-        holder.spin_size.setSelection(list_cars.get(position).getSize().getKey());
+        holder.spin_size.setSelection(list_cars.get(position).getSize());
 
         holder.txt_name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -81,7 +81,7 @@ public class ListAdapterCar extends BaseAdapter {
         holder.spin_size.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int spinner_position, long id) {
-                list_cars.get(position).setSize(Size.values()[spinner_position]);
+                list_cars.get(position).setSize(holder.spin_size.getSelectedItem());
             }
 
             @Override
@@ -102,7 +102,7 @@ public class ListAdapterCar extends BaseAdapter {
 
     static class ViewHolder {
         TextView txt_name;
-        Spinner spin_size;
+        SizeSpinner spin_size;
         ImageButton delete_button;
     }
 }

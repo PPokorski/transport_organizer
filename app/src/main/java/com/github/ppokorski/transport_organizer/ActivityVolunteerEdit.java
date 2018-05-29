@@ -27,7 +27,7 @@ public class ActivityVolunteerEdit extends AppCompatActivity {
         setContentView(R.layout.activity_volunteer_edit);
 
         volunteer = new Volunteer();
-        volunteer =  getIntent().getExtras().getParcelable("volunteer");
+        volunteer = getIntent().getExtras().getParcelable("volunteer");
         boolean new_vol = (volunteer == null);
 
         TextView headline = (TextView) findViewById(R.id.headline_volunteers_edit);
@@ -65,6 +65,7 @@ public class ActivityVolunteerEdit extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        save();
                         result.putExtra("volunteer", volunteer);
                         setResult(RESULT_OK, result);
                         finish();
@@ -78,5 +79,12 @@ public class ActivityVolunteerEdit extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    private void save() {
+        volunteer.setName(((TextView) findViewById(R.id.volunteer_name)).getText().toString());
+        volunteer.setSurname(((TextView) findViewById(R.id.volunteer_surname)).getText().toString());
+        volunteer.setPhoneNumber(((TextView) findViewById(R.id.volunteer_phone_number)).getText().toString());
+        volunteer.setEmail(((TextView) findViewById(R.id.volunteer_email)).getText().toString());
     }
 }

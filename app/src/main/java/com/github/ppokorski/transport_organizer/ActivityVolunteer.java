@@ -39,11 +39,7 @@ public class ActivityVolunteer extends AppCompatActivity {
             case MANAGE_VOLUNTEER_REQUEST:
                 if(resultCode == RESULT_OK)
                 {
-                    Volunteer vol = data.getParcelableExtra("volunteer");
-                    volunteer.setName(vol.getName());
-                    volunteer.setSurname(vol.getSurname());
-                    volunteer.setPhoneNumber(vol.getPhoneNumber());
-                    volunteer.setEmail(vol.getEmail());
+                    this.volunteer = data.getParcelableExtra("volunteer");
                 }
                 break;
 
