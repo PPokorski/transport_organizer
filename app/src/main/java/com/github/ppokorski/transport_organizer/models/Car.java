@@ -3,49 +3,40 @@ package com.github.ppokorski.transport_organizer.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Car extends Identificable implements Parcelable {
+import io.objectbox.annotation.Convert;
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToOne;
+
+@Entity
+public class Car {
+    @Id
+    private long id;
     private String name;
+    @Convert(converter = Size.SizeConverter.class, dbType = Integer.class)
     private Size size;
 
+    private ToOne<Volunteer> volunteer;
+
     public Car() {
-        super();
+        id = 0;
         size = Size.SMALL;
     }
 
-    public Car(String name, Size size) {
+    public Car(long id, String name, Size size, Volunteer volunteer) {
+        this.id = id;
         this.name = name;
         this.size = size;
+        this.volunteer.setTarget(volunteer);
     }
 
-    private Car(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.size = Size.values()[in.readInt()];
+    public long getId() {
+        return id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setId(long id) {
+        this.id = id;
     }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(id);
-        out.writeString(name);
-        out.writeInt(size.ordinal());
-    }
-
-    public static final Parcelable.Creator<Car> CREATOR = new Parcelable.Creator<Car>() {
-        @Override
-        public Car createFromParcel(Parcel in) {
-            return new Car(in);
-        }
-
-        @Override
-        public Car[] newArray(int size) {
-            return new Car[size];
-        }
-    };
 
     public String getName() {
         return name;
@@ -61,5 +52,13 @@ public class Car extends Identificable implements Parcelable {
 
     public void setSize(Size size) {
         this.size = size;
+    }
+
+    public ToOne<Volunteer> getVolunteer() {
+        return volunteer;
+    }
+
+    public Volunteer getVolunteerObject() {
+        return volunteer.getTarget();
     }
 }

@@ -2,10 +2,34 @@ package com.github.ppokorski.transport_organizer.models;
 
 import java.util.ArrayList;
 
+import io.objectbox.converter.PropertyConverter;
+
 public enum Size {
     SMALL(0, "Small"),
     MEDIUM(1, "Medium"),
     LARGE(2, "Large");
+
+    public static class SizeConverter implements PropertyConverter<Size, Integer> {
+        @Override
+        public Size convertToEntityProperty(Integer databaseValue) {
+            if (databaseValue == null) {
+                return null;
+            }
+            for (Size size : Size.values())
+            {
+                if (size.key == databaseValue)
+                {
+                    return size;
+                }
+            }
+            return Size.SMALL;
+        }
+
+        @Override
+        public Integer convertToDatabaseValue(Size entityProperty) {
+            return entityProperty == null ? null : entityProperty.key;
+        }
+    }
 
     public static ArrayList<String> getValues() {
         ArrayList<String> values = new ArrayList<>();

@@ -1,51 +1,37 @@
 package com.github.ppokorski.transport_organizer.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToOne;
 
-public class Guest extends Identificable implements Parcelable {
+@Entity
+public class Guest {
+    @Id
+    private long id;
     private String name;
     private String address;
-    private String phone_number;
+    private String phoneNumber;
+
+    private ToOne<Event> event;
 
     public Guest() {
+        id = 0;
     }
 
-    public Guest(String name, String address, String phone_number) {
+    public Guest(long id, String name, String address, String phone_number) {
+        this.id = id;
         this.name = name;
         this.address = address;
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
 
-    private Guest(Parcel in) {
-        this.id = in.readLong();
-        name = in.readString();
-        address = in.readString();
-        phone_number = in.readString();
+    public long getId() {
+        return id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setId(long id) {
+        this.id = id;
     }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(id);
-        out.writeString(name);
-        out.writeString(address);
-        out.writeString(phone_number);
-    }
-
-    public static final Parcelable.Creator<Guest> CREATOR = new Parcelable.Creator<Guest>() {
-        public Guest createFromParcel(Parcel in) {
-            return new Guest(in);
-        }
-
-        public Guest[] newArray(int size) {
-            return new Guest[size];
-        }
-    };
 
     public String getName() {
         return name;
@@ -64,10 +50,18 @@ public class Guest extends Identificable implements Parcelable {
     }
 
     public String getPhoneNumber() {
-        return phone_number;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phone_number) {
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
+    }
+
+    public ToOne<Event> getEvent() {
+        return event;
+    }
+
+    public Event getEventObject() {
+        return event.getTarget();
     }
 }

@@ -39,7 +39,9 @@ public class ActivityHoursEdit extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         hours = new ArrayList<>();
-        hours = getIntent().getExtras().getParcelableArrayList("hours");
+        // TODO Adapt to ObjectBox
+
+//        hours = getIntent().getExtras().getParcelableArrayList("hours");
         ListView list = (ListView) findViewById(R.id.list_hours);
         adapter_hours = new ListAdapterHour(this, hours);
         list.setAdapter(adapter_hours);
@@ -56,7 +58,8 @@ public class ActivityHoursEdit extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        result.putParcelableArrayListExtra("hours", hours);
+                        // TODO Adapt to ObjectBox
+//                        result.putParcelableArrayListExtra("hours", hours);
                         setResult(RESULT_OK, result);
                         finish();
                     }

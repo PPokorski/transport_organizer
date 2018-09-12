@@ -39,7 +39,8 @@ public class ActivityCarsEdit extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cars = new ArrayList<>();
-        cars = getIntent().getExtras().getParcelableArrayList("cars");
+        // TODO Adapt to ObjectBox
+//        cars = getIntent().getExtras().getParcelableArrayList("cars");
         ListView list = (ListView) findViewById(R.id.list_cars);
         adapter_cars = new ListAdapterCar(this, cars);
         list.setAdapter(adapter_cars);
@@ -56,7 +57,8 @@ public class ActivityCarsEdit extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        result.putParcelableArrayListExtra("cars", cars);
+                        // TODO Adapt to ObjectBox
+//                        result.putParcelableArrayListExtra("cars", cars);
                         setResult(RESULT_OK, result);
                         finish();
                     }

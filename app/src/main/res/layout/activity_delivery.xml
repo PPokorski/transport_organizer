@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="projekt_java.transport_organizer.ActivityDelivery">
+    tools:context="com.github.ppokorski.transport_organizer.ActivityDelivery">
 
     <TextView
         android:id="@+id/text_in_d"

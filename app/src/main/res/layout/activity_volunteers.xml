@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="projekt_java.transport_organizer.ActivityVolunteers">
+    tools:context="com.github.ppokorski.transport_organizer.ActivityVolunteers">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

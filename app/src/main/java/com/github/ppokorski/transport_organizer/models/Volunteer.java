@@ -1,76 +1,49 @@
 package com.github.ppokorski.transport_organizer.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class Volunteer extends Identificable implements Parcelable {
+import io.objectbox.annotation.Backlink;
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToMany;
+import io.objectbox.relation.ToOne;
+
+@Entity
+public class Volunteer {
+    @Id
+    private long id;
     private String name;
     private String surname;
-    private String phone_number;
+    private String phoneNumber;
     private String email;
-    private ArrayList<Car> cars;
-    private ArrayList<AvailableHours> available_hours;
+
+    private ToOne<Event> event;
+
+    @Backlink
+    private ToMany<Car> cars;
+
+    @Backlink
+    private ToMany<AvailableHours> availableHours;
 
     public Volunteer() {
-        super();
-
-        cars = new ArrayList<>();
-        available_hours = new ArrayList<>();
+        id = 0;
     }
 
-    public Volunteer(String name, String surname, String phone_number, String email, ArrayList<Car> cars, ArrayList<AvailableHours> available_hours) {
+    public Volunteer(long id, String name, String surname, String phone_number, String email) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
         this.email = email;
-        this.cars = cars;
-        this.available_hours = available_hours;
     }
 
-    private Volunteer(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.surname = in.readString();
-        this.phone_number = in.readString();
-        this.email = in.readString();
-        cars = new ArrayList<>();
-        in.readTypedList(cars, Car.CREATOR);
-        available_hours = new ArrayList<>();
-        in.readTypedList(available_hours, AvailableHours.CREATOR);
-
+    public long getId() {
+        return id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setId(long id) {
+        this.id = id;
     }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(id);
-        out.writeString(name);
-        out.writeString(surname);
-        out.writeString(phone_number);
-        out.writeString(email);
-        out.writeTypedList(cars);
-        out.writeTypedList(available_hours);
-    }
-
-    public static final Parcelable.Creator<Volunteer> CREATOR = new Parcelable.Creator<Volunteer>() {
-        @Override
-        public Volunteer createFromParcel(Parcel in) {
-            return new Volunteer(in);
-        }
-
-        @Override
-        public Volunteer[] newArray(int size) {
-            return new Volunteer[size];
-        }
-    };
-
 
     public String getName() {
         return name;
@@ -89,11 +62,11 @@ public class Volunteer extends Identificable implements Parcelable {
     }
 
     public String getPhoneNumber() {
-        return phone_number;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phone_number) {
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
 
     public String getEmail() {
@@ -104,27 +77,27 @@ public class Volunteer extends Identificable implements Parcelable {
         this.email = email;
     }
 
-    public ArrayList<Car> getCars() {
+    public ToOne<Event> getEvent() {
+        return event;
+    }
+
+    public Event getEventObject() {
+        return event.getTarget();
+    }
+
+    public ToMany<Car> getCars() {
         return cars;
     }
 
-    public void setCars(ArrayList<Car> cars) {
-        this.cars = cars;
+    public List<Car> getCarsList() {
+        return cars.getListFactory().createList();
     }
 
-    public void addCar(Car car) {
-        cars.add(car);
+    public ToMany<AvailableHours> getAvailableHours() {
+        return availableHours;
     }
 
-    public void removeCar(Car car) {
-        cars.remove(car);
-    }
-
-    public ArrayList<AvailableHours> getAvailableHours() {
-        return available_hours;
-    }
-
-    public void setAvailableHours(ArrayList<AvailableHours> available_hours) {
-        this.available_hours = available_hours;
+    public List<AvailableHours> getAvailableHoursList() {
+        return availableHours.getListFactory().createList();
     }
 }

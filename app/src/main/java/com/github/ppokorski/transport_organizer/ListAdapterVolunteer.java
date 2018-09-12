@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.github.ppokorski.transport_organizer.models.Car;
 import com.github.ppokorski.transport_organizer.models.Volunteer;
-import com.google.api.client.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

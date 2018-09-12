@@ -1,4 +1,4 @@
-package projekt_java.transport_organizer;
+package com.github.ppokorski.transport_organizer;
 
 import org.junit.Test;
 

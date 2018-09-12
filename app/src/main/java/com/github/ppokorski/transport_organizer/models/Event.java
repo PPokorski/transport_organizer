@@ -1,20 +1,45 @@
 package com.github.ppokorski.transport_organizer.models;
 
 import java.util.Date;
+import java.util.List;
 
-public class Event extends Identificable {
+import io.objectbox.annotation.Backlink;
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToMany;
+
+@Entity
+public class Event {
+    @Id
+    private long id;
     private String name;
     private String address;
     private Date date;
 
+    @Backlink
+    private ToMany<Volunteer> volunteers;
+    @Backlink
+    private ToMany<Donor> donors;
+    @Backlink
+    private ToMany<Guest> guests;
+
     public Event() {
-        super();
+        id = 0;
     }
 
-    public Event(String name, String address, Date date) {
+    public Event(long id, String name, String address, Date date) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.date = date;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -39,5 +64,29 @@ public class Event extends Identificable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public ToMany<Volunteer> getVolunteers() {
+        return volunteers;
+    }
+
+    public List<Volunteer> getVolunteersList() {
+        return volunteers.getListFactory().createList();
+    }
+
+    public ToMany<Donor> getDonors() {
+        return donors;
+    }
+
+    public List<Donor> getDonorsList() {
+        return donors.getListFactory().createList();
+    }
+
+    public ToMany<Guest> getGuests() {
+        return guests;
+    }
+
+    public List<Guest> getGuestsList() {
+        return guests.getListFactory().createList();
     }
 }

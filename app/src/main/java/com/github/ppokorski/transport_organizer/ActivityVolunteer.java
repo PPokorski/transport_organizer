@@ -16,6 +16,8 @@ import com.github.ppokorski.transport_organizer.models.Volunteer;
 
 import java.util.ArrayList;
 
+import io.objectbox.Box;
+
 public class ActivityVolunteer extends AppCompatActivity {
 
     static final int MANAGE_VOLUNTEER_REQUEST = 0;
@@ -29,8 +31,8 @@ public class ActivityVolunteer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volunteer);
 
-        volunteer = new Volunteer();
-        volunteer = getIntent().getExtras().getParcelable("volunteer");
+        long id = getIntent().getExtras().getLong("volunteer");
+        volunteer = DatabaseHelper.getInstance(this).getObject(Volunteer.class, id);
     }
 
     @Override
@@ -46,16 +48,18 @@ public class ActivityVolunteer extends AppCompatActivity {
             case MANAGE_CARS_REQUEST:
                 if(resultCode == RESULT_OK)
                 {
-                    ArrayList<Car> cars = data.getParcelableArrayListExtra("cars");
-                    volunteer.setCars(cars);
+                    // TODO Adapt to ObjectBox
+//                    ArrayList<Car> cars = data.getParcelableArrayListExtra("cars");
+//                    volunteer.setCars(cars);
                 }
                 break;
 
             case MANAGE_HOURS_REQUEST:
                 if(resultCode == RESULT_OK)
                 {
-                    ArrayList<AvailableHours> hours = data.getParcelableArrayListExtra("hours");
-                    volunteer.setAvailableHours(hours);
+                    // TODO Adapt to ObjectBox
+//                    ArrayList<AvailableHours> hours = data.getParcelableArrayListExtra("hours");
+//                    volunteer.setAvailableHours(hours);
                 }
                 break;
 
@@ -63,21 +67,23 @@ public class ActivityVolunteer extends AppCompatActivity {
     }
 
     public void goEditVol(View view) {
-        Intent go_edit = new Intent(this, ActivityVolunteerEdit.class);
-        go_edit.putExtra("volunteer", volunteer);
-        startActivityForResult(go_edit, MANAGE_VOLUNTEER_REQUEST);
+        Intent intent = new Intent(this, ActivityVolunteerEdit.class);
+        intent.putExtra("volunteer", volunteer.getId());
+        startActivityForResult(intent, MANAGE_VOLUNTEER_REQUEST);
     }
 
     public void goEditCars(View view) {
         Intent go_cars = new Intent(this, ActivityCarsEdit.class);
-        go_cars.putExtra("cars", volunteer.getCars());
+        // TODO Adapt to ObjectBox
+//        go_cars.putExtra("cars", volunteer.getCars());
         startActivityForResult(go_cars, MANAGE_CARS_REQUEST);
     }
 
 
     public void goAddHoursVol(View view) {
         Intent go_add_hours = new Intent(this, ActivityHoursEdit.class);
-        go_add_hours.putExtra("hours", volunteer.getAvailableHours());
+        // TODO Adapt to ObjectBox
+//        go_add_hours.putExtra("hours", volunteer.getAvailable_hours());
         startActivityForResult(go_add_hours, MANAGE_HOURS_REQUEST);
     }
 

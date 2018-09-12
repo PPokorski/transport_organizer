@@ -1,82 +1,55 @@
 package com.github.ppokorski.transport_organizer.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.List;
 
-import java.util.ArrayList;
+import io.objectbox.annotation.Backlink;
+import io.objectbox.annotation.Convert;
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToMany;
+import io.objectbox.relation.ToOne;
 
-public class Transport extends Identificable implements Parcelable {
+@Entity
+public class Transport {
+    @Id
+    private long id;
     private String name;
-    private String pickup_address;
-    private String target_address;
+    private String pickupAddress;
+    private String targetAddress;
+    @Convert(converter = Size.SizeConverter.class, dbType = Integer.class)
     private Size size;
+    @Convert(converter = Status.StatusConverter.class, dbType = Integer.class)
     private Status status;
 
-    private Volunteer volunteer;
-    private Donor donor;
-    private Guest guest;
+    private ToOne<Volunteer> volunteer;
+    private ToOne<Donor> donor;
+    private ToOne<Guest> guest;
 
-     private ArrayList<AvailableHours> available_hours;
+    @Backlink
+    private ToMany<AvailableHours> availableHours;
 
     public Transport() {
-        super();
-
+        id = 0;
         size = Size.SMALL;
         status = Status.UNASSIGNED;
-        available_hours = new ArrayList<>();
     }
 
-    public Transport(String name, String pickup_address, String target_address, Size size, Status status, ArrayList<AvailableHours> available_hours) {
+    public Transport(long id, String name, String pickup_address, String target_address, Size size, Status status) {
+        this.id = id;
         this.name = name;
-        this.pickup_address = pickup_address;
-        this.target_address = target_address;
+        this.pickupAddress = pickup_address;
+        this.targetAddress = target_address;
         this.size = size;
         this.status = status;
-        this.available_hours = available_hours;
     }
 
-    private Transport(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.pickup_address = in.readString();
-        this.target_address = in.readString();
-        this.size = Size.values()[in.readInt()];
-        this.status = Status.values()[in.readInt()];
-        this.volunteer = in.readParcelable(getClass().getClassLoader());
-        this.donor = in.readParcelable(getClass().getClassLoader());
-        this.guest = in.readParcelable(getClass().getClassLoader());
-        available_hours = new ArrayList<>();
-        in.readTypedList(available_hours, AvailableHours.CREATOR);
+    public long getId() {
+        return id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setId(long id) {
+        this.id = id;
     }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(id);
-        out.writeString(name);
-        out.writeString(pickup_address);
-        out.writeString(target_address);
-        out.writeInt(size.ordinal());
-        out.writeInt(status.ordinal());
-        out.writeParcelable(volunteer, flags);
-        out.writeParcelable(donor, flags);
-        out.writeParcelable(guest, flags);
-        out.writeTypedList(available_hours);
-    }
-
-    public static final Parcelable.Creator<Transport> CREATOR = new Parcelable.Creator<Transport>() {
-        public Transport createFromParcel(Parcel in) {
-            return new Transport(in);
-        }
-
-        public Transport[] newArray(int size) {
-            return new Transport[size];
-        }
-    };
 
     public String getName() {
         return name;
@@ -87,19 +60,19 @@ public class Transport extends Identificable implements Parcelable {
     }
 
     public String getPickupAddress() {
-        return pickup_address;
+        return pickupAddress;
     }
 
     public void setPickupAddress(String pickup_address) {
-        this.pickup_address = pickup_address;
+        this.pickupAddress = pickup_address;
     }
 
     public String getTargetAddress() {
-        return target_address;
+        return targetAddress;
     }
 
     public void setTargetAddress(String target_address) {
-        this.target_address = target_address;
+        this.targetAddress = target_address;
     }
 
     public Size getSize() {
@@ -118,59 +91,43 @@ public class Transport extends Identificable implements Parcelable {
         this.status = status;
     }
 
-    public String getReporterPhoneNumber() {
-        if (donor == null && guest == null)
-        {
-            throw new IllegalStateException("Either Donor or Guest needs to be initialized");
-        }
-
-        if (donor != null)
-        {
-            return donor.getPhoneNumber();
-        }
-        else
-        {
-            return guest.getPhoneNumber();
-        }
-    }
-
-    public Volunteer getVolunteer() {
+    public ToOne<Volunteer> getVolunteer() {
         return volunteer;
     }
 
-    public void setVolunteer(Volunteer volunteer) {
-        this.volunteer = volunteer;
+    public Volunteer getVolunteerObject() {
+        return volunteer.getTarget();
     }
 
-    public Donor getDonor() {
+    public ToOne<Donor> getDonor() {
         return donor;
     }
 
-    public void setDonor(Donor donor) {
-        if (this.guest != null && donor != null)
-        {
-            throw new IllegalStateException("The Donor cannot be set if Guest is not null");
-        }
-        this.donor = donor;
+    public Donor getDonorObject() {
+        return donor.getTarget();
     }
 
-    public Guest getGuest() {
+    public void setDonorObject(Donor donor) {
+        this.donor.setTarget(donor);
+    }
+
+    public ToOne<Guest> getGuest() {
         return guest;
     }
 
-    public void setGuest(Guest guest) {
-        if (this.donor != null && guest != null)
-        {
-            throw new IllegalStateException("The Guest cannot be set if Donor is not null");
-        }
-        this.guest = guest;
+    public Guest getGuestObject() {
+        return guest.getTarget();
     }
 
-    public ArrayList<AvailableHours> getAvailableHours() {
-        return available_hours;
+    public void setGuestObject(Guest guest) {
+        this.guest.setTarget(guest);
     }
 
-    public void setAvailableHours(ArrayList<AvailableHours> available_hours) {
-        this.available_hours = available_hours;
+    public ToMany<AvailableHours> getAvailableHours() {
+        return availableHours;
+    }
+
+    public List<AvailableHours> getAvailableHoursList() {
+        return availableHours.getListFactory().createList();
     }
 }

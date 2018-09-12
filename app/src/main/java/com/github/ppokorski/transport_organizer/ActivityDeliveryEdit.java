@@ -2,6 +2,7 @@ package com.github.ppokorski.transport_organizer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class ActivityDeliveryEdit extends AppCompatActivity {
     private static final int DONOR_COMPANY = 2;
 
     private Transport transport;
-    int reporter_type = DONOR_COMPANY;
+    private int reporter_type = DONOR_COMPANY;
     private Intent result;
 
     @Override
@@ -31,19 +32,10 @@ public class ActivityDeliveryEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_edit);
 
-        transport = new Transport();
-        transport = getIntent().getExtras().getParcelable("transport");
-        boolean new_delivery = (transport == null);
+        long id = getIntent().getExtras().getLong("transport");
+        transport = id != 0? DatabaseHelper.getInstance(this).getObject(Transport.class, id) : null;
 
         TextView headline = (TextView) findViewById(R.id.headline_deliveries_edit);
-        if(new_delivery){
-            headline.setText(getResources().getString(R.string.edit_activity_new));
-        }
-        else
-        {
-            headline.setText(getResources().getString(R.string.edit_activity_edit));
-        }
-
         TextView txt_name = (TextView) findViewById(R.id.transport_name);
         TextView txt_from = (TextView) findViewById(R.id.transport_from);
         TextView txt_to = (TextView) findViewById(R.id.transport_to);
@@ -69,8 +61,13 @@ public class ActivityDeliveryEdit extends AppCompatActivity {
         TextView txt_address = (TextView) findViewById(R.id.txt_address);
         TextView txt_phone_number = (TextView) findViewById(R.id.txt_phone_number);
 
-        if (!new_delivery)
+        if (transport == null){
+            headline.setText(getResources().getString(R.string.edit_activity_new));
+            transport = new Transport();
+        }
+        else
         {
+            headline.setText(getResources().getString(R.string.edit_activity_edit));
             txt_name.setText(transport.getName());
             txt_from.setText(transport.getPickupAddress());
             txt_to.setText(transport.getTargetAddress());
@@ -79,24 +76,24 @@ public class ActivityDeliveryEdit extends AppCompatActivity {
 
             String company_name, person_name, address, phone_number;
 
-            if (transport.getGuest() != null)
+            if (transport.getGuestObject() != null)
             {
-                txt_person_name.setText(transport.getGuest().getName());
-                txt_address.setText(transport.getGuest().getAddress());
-                txt_phone_number.setText(transport.getGuest().getPhoneNumber());
+                txt_person_name.setText(transport.getGuestObject().getName());
+                txt_address.setText(transport.getGuestObject().getAddress());
+                txt_phone_number.setText(transport.getGuestObject().getPhoneNumber());
 
                 ((RadioButton) findViewById(R.id.rb_guest)).performClick();
             }
-            else if (transport.getDonor() != null)
+            else if (transport.getDonorObject() != null)
             {
-                txt_person_name.setText(transport.getDonor().getContactName());
-                txt_address.setText(transport.getDonor().getAddress());
-                txt_phone_number.setText(transport.getDonor().getPhoneNumber());
+                txt_person_name.setText(transport.getDonorObject().getContactName());
+                txt_address.setText(transport.getDonorObject().getAddress());
+                txt_phone_number.setText(transport.getDonorObject().getPhoneNumber());
 
                 ((RadioButton) findViewById(R.id.rb_donor)).performClick();
-                if (!transport.getDonor().getCompanyName().isEmpty())
+                if (!transport.getDonorObject().getCompanyName().isEmpty())
                 {
-                    txt_company_name.setText(transport.getDonor().getCompanyName());
+                    txt_company_name.setText(transport.getDonorObject().getCompanyName());
 
                     ((RadioButton) findViewById(R.id.rb_company)).performClick();
                 }
@@ -108,6 +105,7 @@ public class ActivityDeliveryEdit extends AppCompatActivity {
         }
 
         result = new Intent();
+        result.putExtra("transport", transport.getId());
     }
 
     public void onRadioButtonClicked(View view) {
@@ -168,7 +166,6 @@ public class ActivityDeliveryEdit extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         save();
-                        result.putExtra("transport", transport);
                         setResult(RESULT_OK, result);
                         finish();
                     }
@@ -184,39 +181,61 @@ public class ActivityDeliveryEdit extends AppCompatActivity {
     }
 
     private void save() {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
         transport.setName(((TextView) findViewById(R.id.transport_name)).getText().toString());
         transport.setPickupAddress(((TextView) findViewById(R.id.transport_from)).getText().toString());
         transport.setTargetAddress(((TextView) findViewById(R.id.transport_to)).getText().toString());
 
         switch (reporter_type) {
             case GUEST:
-                Guest guest = new Guest();
+                Guest guest = transport.getGuestObject();
+                if (guest == null)
+                {
+                     guest = new Guest();
+                }
                 guest.setName(((TextView) findViewById(R.id.txt_person_name)).getText().toString());
                 guest.setAddress(((TextView) findViewById(R.id.txt_address)).getText().toString());
                 guest.setPhoneNumber(((TextView) findViewById(R.id.txt_phone_number)).getText().toString());
-                transport.setDonor(null);
-                transport.setGuest(guest);
+                databaseHelper.deleteObjectIfNotNull(Donor.class, transport.getDonorObject());
+                transport.setDonorObject(null);
+                databaseHelper.updateOrCreateObject(Guest.class, guest);
+                transport.setGuestObject(guest);
                 break;
 
             case DONOR_COMPANY:
-                Donor company = new Donor();
+                Donor company = transport.getDonorObject();
+                if (company == null)
+                {
+                    company = new Donor();
+                }
                 company.setCompanyName(((TextView) findViewById(R.id.txt_company_name)).getText().toString());
                 company.setContactName(((TextView) findViewById(R.id.txt_person_name)).getText().toString());
                 company.setAddress(((TextView) findViewById(R.id.txt_address)).getText().toString());
                 company.setPhoneNumber(((TextView) findViewById(R.id.txt_phone_number)).getText().toString());
-                transport.setGuest(null);
-                transport.setDonor(company);
+                databaseHelper.deleteObjectIfNotNull(Guest.class, transport.getGuestObject());
+                transport.setGuestObject(null);
+                databaseHelper.updateOrCreateObject(Donor.class, company);
+                transport.setDonorObject(company);
                 break;
 
             case DONOR_PERSON:
-                Donor person = new Donor();
+                Donor person = transport.getDonorObject();
+                if (person == null)
+                {
+                    person = new Donor();
+                }
                 person.setCompanyName("");
                 person.setContactName(((TextView) findViewById(R.id.txt_person_name)).getText().toString());
                 person.setAddress(((TextView) findViewById(R.id.txt_address)).getText().toString());
                 person.setPhoneNumber(((TextView) findViewById(R.id.txt_phone_number)).getText().toString());
-                transport.setGuest(null);
-                transport.setDonor(person);
+                databaseHelper.deleteObjectIfNotNull(Guest.class, transport.getGuestObject());
+                transport.setGuestObject(null);
+                databaseHelper.updateOrCreateObject(Donor.class, person);
+                transport.setDonorObject(person);
                 break;
         }
+
+        DatabaseHelper.getInstance(this).updateOrCreateObject(Transport.class, transport);
+        result.putExtra("transport", transport.getId());
     }
 }

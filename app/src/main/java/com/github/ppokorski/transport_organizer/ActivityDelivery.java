@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.github.ppokorski.transport_organizer.models.AvailableHours;
 import com.github.ppokorski.transport_organizer.models.Transport;
+import com.github.ppokorski.transport_organizer.models.Volunteer;
 
 import java.util.ArrayList;
 
@@ -26,49 +27,57 @@ public class ActivityDelivery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery);
 
-        transport = new Transport();
-        transport = getIntent().getExtras().getParcelable("transport");
+        long id = getIntent().getExtras().getLong("transport");
+        transport = DatabaseHelper.getInstance(this).getObject(Transport.class, id);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch(requestCode) {
-            case MANAGE_TRANSPORT_REQUEST:
-                if(resultCode == RESULT_OK)
-                {
-                    this.transport = data.getParcelableExtra("transport");;
-                }
-                break;
-
-            case MANAGE_HOURS_REQUEST:
-                if(resultCode == RESULT_OK)
-                {
-                    ArrayList<AvailableHours> hours = data.getParcelableArrayListExtra("hours");
-                    transport.setAvailableHours(hours);
-                }
-                break;
-        }
+        long id = getIntent().getExtras().getLong("transport");
+        transport = DatabaseHelper.getInstance(this).getObject(Transport.class, id);
+//        switch(requestCode) {
+//            case MANAGE_TRANSPORT_REQUEST:
+//                if(resultCode == RESULT_OK)
+//                {
+//                    this.transport = data.getParcelableExtra("transport");;
+//                }
+//                break;
+//
+//            case MANAGE_HOURS_REQUEST:
+//                if(resultCode == RESULT_OK)
+//                {
+//                    // TODO Adapt to ObjectBox
+////                    ArrayList<AvailableHours> hours = data.getParcelableArrayListExtra("hours");
+////                    transport.setAvailableHours(hours);
+//                }
+//                break;
+//        }
     }
 
     public void goEditDel(View view) {
-        Intent go_edit = new Intent(this, ActivityDeliveryEdit.class);
-        go_edit.putExtra("transport", transport);
-        startActivityForResult(go_edit, MANAGE_TRANSPORT_REQUEST);
+        Intent intent = new Intent(this, ActivityDeliveryEdit.class);
+        intent.putExtra("transport", transport.getId());
+        startActivityForResult(intent, MANAGE_TRANSPORT_REQUEST);
     }
 
     public void goAddHoursDel(View view) {
         Intent go_add_hours = new Intent(this, ActivityHoursEdit.class);
-        go_add_hours.putExtra("hours", transport.getAvailableHours());
+        // TODO Adapt to ObjectBox
+//        go_add_hours.putExtra("hours", transport.getAvailableHours());
         startActivityForResult(go_add_hours, MANAGE_HOURS_REQUEST);
     }
 
     public void callDel(View view) {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + transport.getReporterPhoneNumber()));
-        startActivity(intent);
+        // TODO Adapt to ObjectBox
+
+//        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + transport.getReporterPhoneNumber()));
+//        startActivity(intent);
     }
 
     public void sendSMSDel(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + transport.getReporterPhoneNumber()));
-        startActivity(intent);
+        // TODO Adapt to ObjectBox
+
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + transport.getReporterPhoneNumber()));
+//        startActivity(intent);
     }
 }

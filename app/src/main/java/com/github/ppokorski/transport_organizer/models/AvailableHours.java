@@ -5,50 +5,39 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-public class AvailableHours extends Identificable implements Parcelable {
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToOne;
+
+@Entity
+public class AvailableHours {
+    @Id
+    private long id;
     private Date begin;
     private Date end;
 
+    private ToOne<Volunteer> volunteer;
+    private ToOne<Transport> transport;
+
     public AvailableHours() {
-        super();
+        id = 0;
         begin = new Date();
         end = new Date();
     }
 
-    public AvailableHours(Date begin, Date end) {
+    public AvailableHours(long id, Date begin, Date end) {
+        this.id = id;
         this.begin = begin;
         this.end = end;
     }
 
-    private AvailableHours(Parcel in) {
-        this.id = in.readLong();
-        this.begin = new Date(in.readLong());
-        this.end = new Date(in.readLong());
+    public long getId() {
+        return id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setId(long id) {
+        this.id = id;
     }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(id);
-        out.writeLong(begin.getTime());
-        out.writeLong(end.getTime());
-    }
-
-    public static final Parcelable.Creator<AvailableHours> CREATOR = new Parcelable.Creator<AvailableHours>() {
-        @Override
-        public AvailableHours createFromParcel(Parcel in) {
-            return new AvailableHours(in);
-        }
-
-        @Override
-        public AvailableHours[] newArray(int size) {
-            return new AvailableHours[size];
-        }
-    };
 
     public Date getBegin() {
         return begin;
@@ -64,5 +53,21 @@ public class AvailableHours extends Identificable implements Parcelable {
 
     public void setEnd(Date end) {
         this.end = end;
+    }
+
+    public ToOne<Volunteer> getVolunteer() {
+        return volunteer;
+    }
+
+    public Volunteer getVolunteerObject() {
+        return volunteer.getTarget();
+    }
+
+    public ToOne<Transport> getTransport() {
+        return transport;
+    }
+
+    public Transport getTransportObject() {
+        return transport.getTarget();
     }
 }
